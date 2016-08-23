@@ -10,7 +10,7 @@
 		brand: "J-Crew",
 		description : "modern oxford styled for the modern man",
 		price: "$80",
-		availability: false
+		availability: false,
 	},
 	{
 		brand: "Alexander McQueen",
@@ -19,8 +19,8 @@
 		availability: true
 	},
 	{
-		brand: "Calvin Klein",
-		description : "Spinning like DJ Calvin",
+		brand: "A.P.C",
+		description : "Sweet French",
 		price: "$180",
 		availability: false
 	},
@@ -31,7 +31,7 @@
 		availability: true
 	},
 	{
-		brand: "Topman",
+		brand: "Saint Laurent",
 		description : "Top of the line stuff",
 		price: "$100",
 		availability: false
