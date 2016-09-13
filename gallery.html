@@ -1,0 +1,8 @@
+<div ng-controller="storeController as store">
+    <h1 class="title">The Chic Store</h1>
+	<div class = "product" ng-repeat="product in store.products">
+        <display></display>
+        <review-panel></review-panel>
+        <button class="btn btn-info" ng-show="product.availability == true">Add to Cart!</button>
+	</div>
+</div>

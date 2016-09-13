@@ -88,6 +88,17 @@
         };
     });
 
+    app.directive('gallery', function(){
+        return{
+            restrict: 'E',
+            templateUrl: 'gallery.html',
+            controller: function(){
+                this.products = tees;
+            },
+            controllerAs:'store'
+        };
+    });
+
 	var tees = [
 	{
 		brand: "J-Crew",
