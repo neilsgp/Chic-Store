@@ -30,6 +30,50 @@
 		};
 	});
 
+	app.controller("reviewController", function(){
+		this.review = {};
+
+		this.addReview = function(product){
+			product.reviews.push(this.review);
+			this.review = {};
+		};
+	});
+
+	app.directive("productTitle", function(){
+		return{
+			restrict:'A',
+			templateUrl:'product-title.html'
+		};
+	});
+
+	app.directive("basicInfo", function(){
+		return{
+			restrict: 'A',
+			templateUrl: "basic-info.html"
+		};
+	});
+
+	app.directive("specifications", function(){
+		return{
+			restrict: 'A',
+			templateUrl: "specifications.html"
+		}
+	});
+
+	app.directive("review", function(){
+		return{
+			restrict: 'E',
+			templateUrl: 'review.html'
+		};
+	});
+
+	app.directive('display', function(){
+		return{
+			restrict:'E',
+			templateUrl: 'display.html'
+		};	
+	});
+
 	var tees = [
 	{
 		brand: "J-Crew",
@@ -40,7 +84,22 @@
 			"images/porter1.jpg",
 			"images/porter2.jpg",
 
-		]
+		],
+		reviews:[{
+			stars:5,
+			body:"Holy Moly this thing is fab fam!",
+			author: "Ana Wintour"
+		},
+		{
+			stars:5,
+			body:"Holy Moly this thing is fab fam!",
+			author: "Ana Wintour"
+		},
+		{
+			stars:5,
+			body:"Holy Moly this thing is fab fam!",
+			author: "Ana Wintour"
+		}]
 	},
 	{
 		brand: "Alexander McQueen",
@@ -51,18 +110,28 @@
 			"images/porter3.jpg",
 			"images/porter2.jpg",
 
-		]
+		],
+		reviews:[{
+			stars:5,
+			body:"Holy Moly cool bam fam!",
+			author: "Karl Lagerfield"
+		}]
 	},
 	{
 		brand: "A.P.C",
 		description : "Sweet French",
 		price: "180",
-		availability: true,
+		availability: false,
 		images:[
 			"images/porter2.jpg",
 			"images/porter4.jpg",
 
-		]
+		],
+		reviews:[{
+			stars:5,
+			body:"Holy Moly sweet fam!",
+			author: "Coco Chanel"
+		}]
 	},
 	{
 		brand: "Acne Studios",
@@ -73,6 +142,11 @@
 			"images/porter4.jpg",
 			"images/porter3.jpg",
 
-		]
-	}]
+		],
+		reviews:[{
+			stars:5,
+			body:"Holy Moly rivetting fam!",
+			author: "French Montana"
+		}]
+	}];
 })();

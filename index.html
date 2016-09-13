@@ -8,94 +8,51 @@
     <script data-require="semantic-ui@*" data-semver="0.9.6" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.9.6/javascript/semantic.min.js"></script>
     <script data-require="angular.js@1.2.x" src="http://code.angularjs.org/1.2.15/angular.js" data-semver="1.2.15"></script>
     <script src="app.js"></script>
-
-    <style type="text/css">
-        .title{
-            font-family: 'Lora', sans-serif;
-            text-align: center;
-            border-bottom: 1px solid black;
-            padding-bottom: 20px;
-        }
-        .product{
-            -webkit-rendering: optimizeLegibility;
-            -webkit-font-smoothing:antialiased;
-            display: block;
-            color: white;
-            background-color: #202020;
-            font-family: 'Lora', sans-serif;
-            margin-top: 35px;
-            padding: 20px 20px 20px 20px;
-            border-top: 5px solid #4169e1;
-            border-spacing: 2px;
-        }
-
-        .product:last-child{
-            margin-bottom: 35px;
-        }
-
-        .img{
-            list-style: none;
-        }
-
-        .panel{
-            background: #202020;
-            margin-top: 30px;
-        }
-
-        .nav{
-            margin-top: 20px;
-        }
-
-        .nav li:first-child{
-            margin-left: 0px;
-        }
-
-        .nav li{
-            display: inline;
-            margin-left: 30px;
-            border-radius: 5px;
-            border: 2px solid white;
-            padding: 10px 10px 10px 10px;
-        }
-
-        .nav li:hover{
-            background: white;
-            color: rgb(0,0,0);
-            transition-duration: 0.6s;
-        }
-        .nav li:active{
-            background: white;
-        }
-    </style>
+    <style src="style.css"></style>
 </head>
-<body class="container" ng-controller="storeController as store">
+<body class="container page" ng-controller="storeController as store">
     <h1 class="title">The Chic Store</h1>
 	<div class = "product" ng-repeat="product in store.products">
-		<h1>{{product.brand}}</h1>
-        <ul ng-repeat="image in product.images" class="img">
-            <li><img ng-src="{{image}}" height="200" width="200" /></li>
-        </ul>
-		<p>{{product.price | currency}}</p>
+        <display></display>
         <section ng-controller="panelController as panel">
             <ul class="nav">
                 <li ng-class="{active: panel.isSelected(1)}" ng-click="panel.selectTab(1)">Description</li>       
                 <li ng-class="{active: panel.isSelected(2)}" ng-click="panel.selectTab(2)">Specification</li>       
                 <li ng-class="{active: panel.isSelected(3)}" ng-click="panel.selectTab(3)">Reviews</li> 
+                
+                <div product-title ng-show="panel.isSelected(1)"></div>
+                <div specifications class ="panel" ng-show="panel.isSelected(2)"></div>
 
-                <div class ="panel" ng-show="panel.isSelected(1)">
-                    <h3>Description</h3>
-                    <p>{{product.description}}</p>
-                </div> 
-                <div class ="panel" ng-show="panel.isSelected(2)">
-                    <h3>Specification</h3>
-                    <p>None yet</p>
-                </div>
                 <div class ="panel" ng-show="panel.isSelected(3)">
-                    <h3>Reviews</h3>
-                    <blockquote>None yet</blockquote>
+                    <div class = "reviews" ng-repeat="review in product.reviews">
+                        <review></review>   
+                    </div>
+
+                    <form name="reviewForm" ng-controller="reviewController as reviewCtrl" ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
+                    	<blockquote>
+                    		<p>{{reviewCtrl.review.stars}}</p>
+                            <p>{{reviewCtrl.review.body}}</p>
+                            <p>{{reviewCtrl.review.author}}</p>
+                    	</blockquote>              
+                		
+                        <select ng-model="reviewCtrl.review.stars" required>
+                			<option value="1">1 star</option>
+                			<option value="1">2 star</option>
+                			<option value="1">3 star</option>
+                			<option value="1">4 star</option>
+                			<option value="1">5 star</option>
+                		</select><br><br>
+                		
+                        <textarea style="color:black" ng-model="reviewCtrl.review.body" required></textarea><br>
+                		<label>by:</label><br>
+                		<input style="color:black" type="email" ng-model="reviewCtrl.review.author" required/>
+                        <div> reviewForm is {{reviewForm.$valid}}</div>
+                		<input style="color:black" type="submit" value="Submit">
+                    </form>
                 </div> 
             </ul>    
         </section>
+
         <button class="btn btn-info" ng-show="product.availability == true">Add to Cart!</button>
 	</div>
 </body>
