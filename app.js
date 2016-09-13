@@ -18,18 +18,6 @@
 		};
 	});
 
-	app.controller("panelController", function(){
-		this.tab = 1;
-
-		this.selectTab = function(setTab){
-			this.tab = setTab;
-		};
-
-		this.isSelected = function(selectTab){
-			return this.tab === selectTab;
-		};
-	});
-
 	app.controller("reviewController", function(){
 		this.review = {};
 
@@ -44,6 +32,13 @@
 			restrict:'A',
 			templateUrl:'product-title.html'
 		};
+	});
+
+	app.directive('panelList', function(){
+		return{
+			restrict: 'E',
+			templateUrl: 'panel-list.html'
+		}
 	});
 
 	app.directive("basicInfo", function(){
@@ -73,6 +68,25 @@
 			templateUrl: 'display.html'
 		};	
 	});
+
+    app.directive('reviewPanel', function(){
+        return{
+            restrict: 'E',
+            templateUrl: 'review-panel.html',
+            controller:function(){
+                this.tab = 1;
+
+                this.selectTab = function(setTab){
+                    this.tab = setTab;
+                };
+
+                this.isSelected = function(selectTab){
+                    return this.tab === selectTab;
+                };
+            },
+            controllerAs:'panel'
+        };
+    });
 
 	var tees = [
 	{

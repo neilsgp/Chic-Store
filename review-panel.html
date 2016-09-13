@@ -1,0 +1,14 @@
+<section>
+    <ul class="nav">
+        <li ng-class="{active: panel.isSelected(1)}" ng-click="panel.selectTab(1)">Description</li>       
+        <li ng-class="{active: panel.isSelected(2)}" ng-click="panel.selectTab(2)">Specification</li>       
+        <li ng-class="{active: panel.isSelected(3)}" ng-click="panel.selectTab(3)">Reviews</li> 
+        
+        <div product-title ng-show="panel.isSelected(1)"></div>
+        <div specifications class ="panel" ng-show="panel.isSelected(2)"></div>
+
+        <div class ="panel" ng-show="panel.isSelected(3)">
+            <review></review>
+        </div> 
+    </ul>    
+</section>
